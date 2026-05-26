@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 2,
+  "agentName": "GARAVELLO",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus14.actions.githubusercontent.com/gK4bZqVjzzEcyqx6qo3ZuWYHxKz35hTRr85vDpqBzVUmhSdzdl/",
+  "gitHubUrl": "https://github.com/rfgaravello/CDevOps-Simulation",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}
