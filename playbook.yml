@@ -5,14 +5,11 @@
 
   tasks:
     - name: Aguardar a API do sistema medico responder (Healthcheck)
-      ansible.builtin.uri:
-        url: "http://127.0.0.1:8080/health"
-        status_code: 200
-        method: GET
-        force_basic_auth: yes  # Força o Ansible a tratar a requisição de forma direta e persistente
-        return_content: yes
-      register: result
-      until: result.status == 200
+      ansible.builtin.shell: |
+        WINDOWS_HOST_IP=$(ip route | grep default | awk '{print $3}')
+        curl -s -o /dev/null -w "%{http_code}" http://$WINDOWS_HOST_IP:8080/health
+      register: curl_result
+      until: curl_result.stdout == "200"
       retries: 10
       delay: 5
 
