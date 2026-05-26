@@ -1,0 +1,38 @@
+name: End-to-End Local DevOps Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run Security Scan (SAST)
+      run: |
+        pip install bandit
+        bandit -r app.py
+
+  local-deploy-and-test:
+    needs: lint-and-test
+    runs-on: self-hosted # Vai rodar na sua máquina Windows usando o Runner local
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Enviar Imagem Docker para o ambiente do Minikube
+      run: |
+        # Configura o terminal para buildar direto dentro do Docker daemon do Minikube
+        & minikube -p minikube docker-env | Invoke-Expression
+        docker build -t telemetry-app:local .
+
+    - name: Executar Terraform (IaC)
+      run: |
+        terraform init
+        terraform apply -auto-approve
+
+    - name: Executar Automação e Auditoria com Ansible
+      run: |
+        # Executa o playbook usando python/pip instalado localmente
+        pip install ansible
+        ansible-playbook playbook.yml
