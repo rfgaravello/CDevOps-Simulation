@@ -1,16 +1,12 @@
 ---
 - name: Pos-Deploy Validation and Configuration Audit
   hosts: localhost
-  connection: local
-  gather_facts: no
-
-  vars:
-    app_endpoint: "http://localhost" # Target exposto pelo Kubernetes Service
+  gather_facts: false
 
   tasks:
-    - name: Aguardar a API do sistema médico responder (Healthcheck)
+    - name: Aguardar a API do sistema medico responder (Healthcheck)
       ansible.builtin.uri:
-        url: "{{ app_endpoint }}/health"
+        url: "http://localhost/health"
         method: GET
         status_code: 200
       register: _result
@@ -22,12 +18,12 @@
       ansible.builtin.assert:
         that:
           - "'UP' in _result.json.status"
-        fail_msg: "A aplicação falhou nos testes de validação pós-deploy!"
+        fail_msg: "A aplicacao falhou nos testes de validacao pos-deploy!"
         success_msg: "Auditoria de integridade realizada com sucesso."
 
-    - name: Simular envio de carga/métrica de telemetria médica
+    - name: Simular envio de carga/metrica de telemetria medica
       ansible.builtin.uri:
-        url: "{{ app_endpoint }}/api/v1/telemetry"
+        url: "http://localhost/api/v1/telemetry"
         method: POST
         body_format: json
         body:
@@ -38,4 +34,4 @@
 
     - name: Exibir log de deploy bem-sucedido
       ansible.builtin.debug:
-        msg: "Pipeline concluído. App rodando em ambiente: {{ _telemetry_test.json.environment }}"
+        msg: "Pipeline concluido. App rodando em ambiente: {{ _telemetry_test.json.environment }}"
