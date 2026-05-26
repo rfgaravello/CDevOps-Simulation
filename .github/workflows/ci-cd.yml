@@ -33,6 +33,19 @@ jobs:
 
     - name: Executar Automacao e Auditoria com Ansible
       run: |
-        # Instala e executa o Ansible nativamente no Linux (WSL)
+        # Atualiza a lista de pacotes do Ubuntu de forma nao-interativa
+        sudo apt-get update -y
+        
+        # Instala o pip e o venv forçando o modo automatico
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install -y python3-pip python3-venv
+        
+        # Cria e ativa o ambiente virtual isolado
+        python3 -m venv venv
+        source venv/bin/activate
+        
+        # Instala o Ansible dentro do venv
+        pip install --upgrade pip
         pip install ansible
+        
+        # Executa o playbook nativamente com suporte total a UTF-8
         ansible-playbook playbook.yml
