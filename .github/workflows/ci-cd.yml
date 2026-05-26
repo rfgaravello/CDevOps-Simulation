@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    
     - name: Run Security Scan (SAST)
       run: |
         pip install bandit
@@ -16,21 +17,23 @@ jobs:
 
   local-deploy-and-test:
     needs: lint-and-test
-    runs-on: self-hosted # Roda no seu Windows (PowerShell)
+    runs-on: self-hosted # Roda no seu WSL (Linux Local)
     steps:
     - uses: actions/checkout@v4
 
     - name: Enviar Imagem Docker para o ambiente do Minikube
       run: |
-        minikube image build -t telemetry-app:local .
+        # Chama o Minikube do Windows com o sufixo .exe
+        minikube.exe image build -t telemetry-app:local .
 
     - name: Executar Terraform (IaC)
       run: |
-        terraform init
-        terraform apply -auto-approve
+        # Chama o Terraform do Windows com o sufixo .exe
+        terraform.exe init
+        terraform.exe apply -auto-approve
 
-    - name: Executar Automacao e Auditoria com Ansible (via WSL)
+    - name: Executar Automacao e Auditoria com Ansible
       run: |
-        # O Windows repassa a execucao para dentro do Ubuntu/WSL, resolvendo o problema do CP1252!
-        wsl pip install ansible
-        wsl ansible-playbook playbook.yml
+        # Instala e executa o Ansible nativamente no Linux (WSL)
+        pip install ansible
+        ansible-playbook playbook.yml
