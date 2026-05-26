@@ -22,9 +22,8 @@ jobs:
 
     - name: Enviar Imagem Docker para o ambiente do Minikube
       run: |
-        # Configura o terminal para buildar direto dentro do Docker daemon do Minikube
-        & minikube -p minikube docker-env | Invoke-Expression
-        docker build -t telemetry-app:local .
+        # Usa o build nativo do Minikube para ignorar incompatibilidades da CLI do Docker local
+        minikube image build -t telemetry-app:local .
 
     - name: Executar Terraform (IaC)
       run: |
