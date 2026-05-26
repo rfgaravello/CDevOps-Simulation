@@ -17,7 +17,7 @@ jobs:
 
   local-deploy-and-test:
     needs: lint-and-test
-    runs-on: self-hosted # Roda no seu Windows usando o Runner local
+    runs-on: self-hosted # Tudo roda local na sua máquina
     steps:
     - uses: actions/checkout@v4
 
@@ -30,13 +30,19 @@ jobs:
         terraform init
         terraform apply -auto-approve
 
-  post-deploy-audit:
-    needs: local-deploy-and-test
-    runs-on: ubuntu-latest # VOLTOU PARA O LINUX! Sem dores de cabeça com o Windows
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Executar Automação e Auditoria com Ansible
+    - name: Executar Auditoria de Disponibilidade (Healthcheck)
       run: |
-        pip install ansible
-        ansible-playbook playbook.yml
+        # Script Python nativo: roda no Windows sem erro de encoding e acessa o localhost de verdade
+        python -c "
+        import urllib.request, time, sys
+        print('⏳ Aguardando a API do sistema medico responder na porta 8080...')
+        for i in range(12):
+            try:
+                response = urllib.request.urlopen('http://localhost:8080/health', timeout=3)
+                if response.getcode() == 200:
+                    print('\n🎯 [SUCESSO] Sistema MedEventOS online e respondendo perfeitamente!'); sys.exit(0)
+            except Exception as e:
+                print(f'Tentativa {i+1}/12: API indisponivel ainda ({e})...')
+                time.sleep(5)
+        print('\n❌ [ERRO] Timeout: O sistema nao respondeu na porta 8080.'); sys.exit(1)
+        "
