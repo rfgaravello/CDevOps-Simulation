@@ -9,25 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    
     - name: Run Security Scan (SAST)
       run: |
         pip install bandit
         bandit -r app.py
 
-    - name: Executar Automação e Auditoria com Ansible
-      run: |
-        pip install ansible
-        ansible-playbook playbook.yml
-
   local-deploy-and-test:
     needs: lint-and-test
-    runs-on: self-hosted # Vai rodar na sua máquina Windows usando o Runner local
+    runs-on: self-hosted # Roda no seu Windows usando o Runner local
     steps:
     - uses: actions/checkout@v4
 
     - name: Enviar Imagem Docker para o ambiente do Minikube
       run: |
-        # Usa o build nativo do Minikube para ignorar incompatibilidades da CLI do Docker local
         minikube image build -t telemetry-app:local .
 
     - name: Executar Terraform (IaC)
@@ -35,4 +30,13 @@ jobs:
         terraform init
         terraform apply -auto-approve
 
-    
+  post-deploy-audit:
+    needs: local-deploy-and-test
+    runs-on: ubuntu-latest # VOLTOU PARA O LINUX! Sem dores de cabeça com o Windows
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Executar Automação e Auditoria com Ansible
+      run: |
+        pip install ansible
+        ansible-playbook playbook.yml
