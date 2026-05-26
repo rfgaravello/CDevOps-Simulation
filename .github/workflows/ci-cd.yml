@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    
     - name: Run Security Scan (SAST)
       run: |
         pip install bandit
@@ -17,7 +16,7 @@ jobs:
 
   local-deploy-and-test:
     needs: lint-and-test
-    runs-on: self-hosted # Tudo roda local na sua máquina
+    runs-on: self-hosted # Roda no seu Windows (PowerShell)
     steps:
     - uses: actions/checkout@v4
 
@@ -30,19 +29,8 @@ jobs:
         terraform init
         terraform apply -auto-approve
 
-    - name: Executar Auditoria de Disponibilidade (Healthcheck)
+    - name: Executar Automacao e Auditoria com Ansible (via WSL)
       run: |
-        # Script Python nativo: roda no Windows sem erro de encoding e acessa o localhost de verdade
-        python -c "
-        import urllib.request, time, sys
-        print('⏳ Aguardando a API do sistema medico responder na porta 8080...')
-        for i in range(12):
-            try:
-                response = urllib.request.urlopen('http://localhost:8080/health', timeout=3)
-                if response.getcode() == 200:
-                    print('\n🎯 [SUCESSO] Sistema MedEventOS online e respondendo perfeitamente!'); sys.exit(0)
-            except Exception as e:
-                print(f'Tentativa {i+1}/12: API indisponivel ainda ({e})...')
-                time.sleep(5)
-        print('\n❌ [ERRO] Timeout: O sistema nao respondeu na porta 8080.'); sys.exit(1)
-        "
+        # O Windows repassa a execucao para dentro do Ubuntu/WSL, resolvendo o problema do CP1252!
+        wsl pip install ansible
+        wsl ansible-playbook playbook.yml
