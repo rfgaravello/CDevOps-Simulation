@@ -31,13 +31,13 @@ jobs:
         terraform apply -auto-approve
 
     - name: Executar Automação e Auditoria com Ansible
+      env:
+        PYTHONIOENCODING: "utf-8"
+        LANG: "C.UTF-8"
+        LC_ALL: "C.UTF-8"
       run: |
         # Instala o Ansible localmente
         pip install ansible
         
-        # Força o PowerShell a usar encoding UTF-8 nesta sessão
-        [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-        $env:PYTHONIOENCODING='utf-8'
-        
-        # Agora o Ansible roda sem chiar
+        # Agora o Ansible lê as variáveis nativas e roda direto
         ansible-playbook playbook.yml
