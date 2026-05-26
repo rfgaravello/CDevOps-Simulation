@@ -6,7 +6,7 @@
   tasks:
     - name: Aguardar a API do sistema medico responder (Healthcheck)
       ansible.builtin.uri:
-        url: "http://localhost/health"
+        url: "http://192.168.15.4/health"
         method: GET
         status_code: 200
       register: _result
