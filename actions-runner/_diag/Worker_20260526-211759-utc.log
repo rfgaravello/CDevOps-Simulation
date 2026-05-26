@@ -1,0 +1,3702 @@
+[2026-05-26 21:17:59Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2026-05-26 21:17:59Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:17:59Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:17:59Z INFO HostContext] Well known config file 'Credentials': 'C:\CDevOps-Simulation\actions-runner\.credentials'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:00Z INFO HostContext] Well known config file 'Runner': 'C:\CDevOps-Simulation\actions-runner\.runner'
+[2026-05-26 21:18:00Z INFO Worker] Version: 2.334.0
+[2026-05-26 21:18:00Z INFO Worker] Commit: f1995ede5d885c997d13d8eca5467c4ce97fe69c
+[2026-05-26 21:18:00Z INFO Worker] Culture: en-US
+[2026-05-26 21:18:00Z INFO Worker] UI Culture: en-US
+[2026-05-26 21:18:00Z INFO Worker] Waiting to receive the job message from the channel.
+[2026-05-26 21:18:00Z INFO ProcessChannel] Receiving message of length 22332, with hash '3d6afc7b99d24b388fa6fc42d2bca3890a0e039da732ea7f9a1870dfcb08002c'
+[2026-05-26 21:18:00Z INFO Worker] Message received.
+[2026-05-26 21:18:00Z INFO Worker] Job message:
+ {
+  "fileTable": [
+    ".github/workflows/ci-cd.yml"
+  ],
+  "mask": [
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    }
+  ],
+  "steps": [
+    {
+      "type": "action",
+      "reference": {
+        "type": "repository",
+        "name": "actions/checkout",
+        "ref": "v4",
+        "repositoryType": "GitHub"
+      },
+      "contextName": "__actions_checkout",
+      "condition": "success()",
+      "id": "5bc7c458-e28c-48f8-b67b-d414df85ded6",
+      "name": "__actions_checkout"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 24,
+        "col": 13,
+        "lit": "Enviar Imagem Docker para o ambiente do Minikube"
+      },
+      "contextName": "__run",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 25,
+              "col": 12,
+              "lit": "minikube image build -t telemetry-app:local .\n"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "b7415c6b-cd8c-4e56-8788-cc75cbf4bd25",
+      "name": "__run"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 28,
+        "col": 13,
+        "lit": "Executar Terraform (IaC)"
+      },
+      "contextName": "__run_2",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 29,
+              "col": 12,
+              "lit": "terraform init\nterraform apply -auto-approve\n"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "71a4289e-7cc2-4908-8baa-80b58ffa89c1",
+      "name": "__run_2"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 33,
+        "col": 13,
+        "lit": "Executar Auditoria de Disponibilidade (Healthcheck)"
+      },
+      "contextName": "__run_3",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 34,
+              "col": 12,
+              "lit": "# Script Python nativo: roda no Windows sem erro de encoding e acessa o localhost de verdade\npython -c \"\nimport urllib.request, time, sys\nprint('⏳ Aguardando a API do sistema medico responder na porta 8080...')\nfor i in range(12):\n    try:\n        response = urllib.request.urlopen('http://localhost:8080/health', timeout=3)\n        if response.getcode() == 200:\n            print('\\n🎯 [SUCESSO] Sistema MedEventOS online e respondendo perfeitamente!'); sys.exit(0)\n    except Exception as e:\n        print(f'Tentativa {i+1}/12: API indisponivel ainda ({e})...')\n        time.sleep(5)\nprint('\\n❌ [ERRO] Timeout: O sistema nao respondeu na porta 8080.'); sys.exit(1)\n\""
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "03c6bab2-4d64-402f-ac44-ce330c44fcc4",
+      "name": "__run_3"
+    }
+  ],
+  "variables": {
+    "Actions.EnableHttpRedirects": {
+      "value": "true"
+    },
+    "DistributedTask.AddWarningToNode12Action": {
+      "value": "true"
+    },
+    "DistributedTask.AddWarningToNode16Action": {
+      "value": "true"
+    },
+    "DistributedTask.AllowRunnerContainerHooks": {
+      "value": "true"
+    },
+    "DistributedTask.DeprecateStepOutputCommands": {
+      "value": "true"
+    },
+    "DistributedTask.DetailUntarFailure": {
+      "value": "true"
+    },
+    "DistributedTask.EnableCompositeActions": {
+      "value": "true"
+    },
+    "DistributedTask.EnableJobServerQueueTelemetry": {
+      "value": "true"
+    },
+    "DistributedTask.EnhancedAnnotations": {
+      "value": "true"
+    },
+    "DistributedTask.ForceGithubJavascriptActionsToNode16": {
+      "value": "true"
+    },
+    "DistributedTask.ForceGithubJavascriptActionsToNode20": {
+      "value": "true"
+    },
+    "DistributedTask.LogTemplateErrorsAsDebugMessages": {
+      "value": "true"
+    },
+    "DistributedTask.MarkJobAsFailedOnWorkerCrash": {
+      "value": "true"
+    },
+    "DistributedTask.NewActionMetadata": {
+      "value": "true"
+    },
+    "DistributedTask.UploadStepSummary": {
+      "value": "true"
+    },
+    "DistributedTask.UseActionArchiveCache": {
+      "value": "true"
+    },
+    "DistributedTask.UseWhich2": {
+      "value": "true"
+    },
+    "RunService.FixEmbeddedIssues": {
+      "value": "true"
+    },
+    "actions.runner.requirenode24": {
+      "value": "false"
+    },
+    "actions.runner.usenode24bydefault": {
+      "value": "false"
+    },
+    "actions.runner.warnonnode20": {
+      "value": "true"
+    },
+    "actions_add_check_run_id_to_job_context": {
+      "value": "true"
+    },
+    "actions_batch_action_resolution": {
+      "value": "false"
+    },
+    "actions_container_action_runner_temp": {
+      "value": "true"
+    },
+    "actions_display_helpful_actions_download_errors": {
+      "value": "true"
+    },
+    "actions_runner_compare_workflow_parser": {
+      "value": "false"
+    },
+    "actions_runner_deprecate_linux_arm32": {
+      "value": "false"
+    },
+    "actions_runner_emit_composite_markers": {
+      "value": "false"
+    },
+    "actions_runner_kill_linux_arm32": {
+      "value": "false"
+    },
+    "actions_runner_node20_removal_date": {
+      "value": ""
+    },
+    "actions_runner_node24_default_date": {
+      "value": ""
+    },
+    "actions_service_container_command": {
+      "value": "true"
+    },
+    "actions_set_orchestration_id_env_for_actions": {
+      "value": "true"
+    },
+    "actions_skip_retry_complete_job_upon_known_errors": {
+      "value": "true"
+    },
+    "actions_snapshot_preflight_hosted_runner_check": {
+      "value": "false"
+    },
+    "actions_snapshot_preflight_image_gen_pool_check": {
+      "value": "false"
+    },
+    "actions_use_bearer_token_for_codeload": {
+      "value": "false"
+    },
+    "actions_uses_cache_service_v2": {
+      "value": "true"
+    },
+    "github_token": {
+      "value": "***",
+      "isSecret": true
+    },
+    "system.from_run_service": {
+      "value": "true"
+    },
+    "system.github.job": {
+      "value": "local-deploy-and-test"
+    },
+    "system.github.launch_endpoint": {
+      "value": "https://launch.actions.githubusercontent.com"
+    },
+    "system.github.results_endpoint": {
+      "value": "https://results-receiver.actions.githubusercontent.com/"
+    },
+    "system.github.results_upload_with_sdk": {
+      "value": "true"
+    },
+    "system.github.token": {
+      "value": "***",
+      "isSecret": true
+    },
+    "system.github.token.permissions": {
+      "value": "{\"Contents\":\"read\",\"Metadata\":\"read\",\"Packages\":\"read\"}"
+    },
+    "system.orchestrationId": {
+      "value": "1a2e398a-0517-4c10-9326-3c72b87ed195.local-deploy-and-test.__default"
+    },
+    "system.phaseDisplayName": {
+      "value": "local-deploy-and-test"
+    },
+    "system.runner.lowdiskspacethreshold": {
+      "value": "100"
+    },
+    "system.runnerEnvironment": {
+      "value": "self-hosted"
+    },
+    "system.runnerGroupName": {
+      "value": "Default"
+    }
+  },
+  "messageType": "RunnerJobRequest",
+  "plan": {
+    "scopeIdentifier": "00000000-0000-0000-0000-000000000000",
+    "planType": "actions",
+    "version": 0,
+    "planId": "1a2e398a-0517-4c10-9326-3c72b87ed195",
+    "planGroup": null,
+    "artifactUri": null,
+    "artifactLocation": null,
+    "definition": null,
+    "owner": null
+  },
+  "timeline": {
+    "id": "1a2e398a-0517-4c10-9326-3c72b87ed195",
+    "changeId": 0,
+    "location": null
+  },
+  "jobId": "fe8d5c90-66ed-50ee-9f32-e8e5a27982fd",
+  "jobDisplayName": "local-deploy-and-test",
+  "jobName": "__default",
+  "requestId": 0,
+  "lockedUntil": "0001-01-01T00:00:00",
+  "resources": {
+    "endpoints": [
+      {
+        "data": {
+          "ServerId": "",
+          "ServerName": "",
+          "CacheServerUrl": "https://artifactcache.actions.githubusercontent.com/gK4bZqVjzzEcyqx6qo3ZuWYHxKz35hTRr85vDpqBzVUmhSdzdl/",
+          "FeedStreamUrl": "wss://results-receiver.actions.githubusercontent.com/_ws/ingest.sock",
+          "ResultsServiceUrl": "https://results-receiver.actions.githubusercontent.com/",
+          "PipelinesServiceUrl": "https://pipelinesghubeus14.actions.githubusercontent.com/gK4bZqVjzzEcyqx6qo3ZuWYHxKz35hTRr85vDpqBzVUmhSdzdl/",
+          "GenerateIdTokenUrl": "",
+          "ConnectivityChecks": "[\"https://broker.actions.githubusercontent.com/health\",\"https://token.actions.githubusercontent.com/ready\",\"https://run.actions.githubusercontent.com/health\"]"
+        },
+        "name": "SystemVssConnection",
+        "url": "https://run-actions-1-azure-eastus.actions.githubusercontent.com/122/",
+        "authorization": {
+          "parameters": {
+            "AccessToken": "***"
+          },
+          "scheme": "OAuth"
+        },
+        "isShared": false,
+        "isReady": true
+      }
+    ]
+  },
+  "contextData": {
+    "github": {
+      "t": 2,
+      "d": [
+        {
+          "k": "ref",
+          "v": "refs/heads/main"
+        },
+        {
+          "k": "sha",
+          "v": "7368170009c631fede114bfd312e2f95ded8561c"
+        },
+        {
+          "k": "repository",
+          "v": "rfgaravello/CDevOps-Simulation"
+        },
+        {
+          "k": "repository_owner",
+          "v": "rfgaravello"
+        },
+        {
+          "k": "repository_owner_id",
+          "v": "26578436"
+        },
+        {
+          "k": "repositoryUrl",
+          "v": "git://github.com/rfgaravello/CDevOps-Simulation.git"
+        },
+        {
+          "k": "run_id",
+          "v": "26475719871"
+        },
+        {
+          "k": "run_number",
+          "v": "12"
+        },
+        {
+          "k": "retention_days",
+          "v": "90"
+        },
+        {
+          "k": "run_attempt",
+          "v": "1"
+        },
+        {
+          "k": "artifact_cache_size_limit",
+          "v": "10"
+        },
+        {
+          "k": "repository_visibility",
+          "v": "public"
+        },
+        {
+          "k": "actor_id",
+          "v": "26578436"
+        },
+        {
+          "k": "actor",
+          "v": "rfgaravello"
+        },
+        {
+          "k": "workflow",
+          "v": "End-to-End Local DevOps Pipeline"
+        },
+        {
+          "k": "head_ref",
+          "v": ""
+        },
+        {
+          "k": "base_ref",
+          "v": ""
+        },
+        {
+          "k": "event_name",
+          "v": "push"
+        },
+        {
+          "k": "server_url",
+          "v": "https://github.com"
+        },
+        {
+          "k": "api_url",
+          "v": "https://api.github.com"
+        },
+        {
+          "k": "graphql_url",
+          "v": "https://api.github.com/graphql"
+        },
+        {
+          "k": "ref_name",
+          "v": "main"
+        },
+        {
+          "k": "ref_protected",
+          "v": false
+        },
+        {
+          "k": "ref_type",
+          "v": "branch"
+        },
+        {
+          "k": "secret_source",
+          "v": "Actions"
+        },
+        {
+          "k": "event",
+          "v": {
+            "t": 2,
+            "d": [
+              {
+                "k": "after",
+                "v": "7368170009c631fede114bfd312e2f95ded8561c"
+              },
+              {
+                "k": "base_ref",
+                "v": null
+              },
+              {
+                "k": "before",
+                "v": "7ccf68ab909ba5141665f5d386bcbe69ba2d16c2"
+              },
+              {
+                "k": "commits",
+                "v": {
+                  "t": 1,
+                  "a": [
+                    {
+                      "t": 2,
+                      "d": [
+                        {
+                          "k": "author",
+                          "v": {
+                            "t": 2,
+                            "d": [
+                              {
+                                "k": "email",
+                                "v": "shokopoka@gmail.com"
+                              },
+                              {
+                                "k": "name",
+                                "v": "rafaelgaravello"
+                              },
+                              {
+                                "k": "username",
+                                "v": "rfgaravello"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "k": "committer",
+                          "v": {
+                            "t": 2,
+                            "d": [
+                              {
+                                "k": "email",
+                                "v": "shokopoka@gmail.com"
+                              },
+                              {
+                                "k": "name",
+                                "v": "rfgaravello"
+                              },
+                              {
+                                "k": "username",
+                                "v": "rfgaravello"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "k": "distinct",
+                          "v": true
+                        },
+                        {
+                          "k": "id",
+                          "v": "7368170009c631fede114bfd312e2f95ded8561c"
+                        },
+                        {
+                          "k": "message",
+                          "v": "fix: ajusta o ansible para o ip"
+                        },
+                        {
+                          "k": "timestamp",
+                          "v": "2026-05-26T18:17:29-03:00"
+                        },
+                        {
+                          "k": "tree_id",
+                          "v": "37a778dff5e707c5fc4518f8b6f6cda02e98f68b"
+                        },
+                        {
+                          "k": "url",
+                          "v": "https://github.com/rfgaravello/CDevOps-Simulation/commit/7368170009c631fede114bfd312e2f95ded8561c"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "compare",
+                "v": "https://github.com/rfgaravello/CDevOps-Simulation/compare/7ccf68ab909b...7368170009c6"
+              },
+              {
+                "k": "created",
+                "v": false
+              },
+              {
+                "k": "deleted",
+                "v": false
+              },
+              {
+                "k": "forced",
+                "v": false
+              },
+              {
+                "k": "head_commit",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "author",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "email",
+                            "v": "shokopoka@gmail.com"
+                          },
+                          {
+                            "k": "name",
+                            "v": "rafaelgaravello"
+                          },
+                          {
+                            "k": "username",
+                            "v": "rfgaravello"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "committer",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "email",
+                            "v": "shokopoka@gmail.com"
+                          },
+                          {
+                            "k": "name",
+                            "v": "rfgaravello"
+                          },
+                          {
+                            "k": "username",
+                            "v": "rfgaravello"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "distinct",
+                      "v": true
+                    },
+                    {
+                      "k": "id",
+                      "v": "7368170009c631fede114bfd312e2f95ded8561c"
+                    },
+                    {
+                      "k": "message",
+                      "v": "fix: ajusta o ansible para o ip"
+                    },
+                    {
+                      "k": "timestamp",
+                      "v": "2026-05-26T18:17:29-03:00"
+                    },
+                    {
+                      "k": "tree_id",
+                      "v": "37a778dff5e707c5fc4518f8b6f6cda02e98f68b"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://github.com/rfgaravello/CDevOps-Simulation/commit/7368170009c631fede114bfd312e2f95ded8561c"
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "pusher",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "email",
+                      "v": "shokopoka@gmail.com"
+                    },
+                    {
+                      "k": "name",
+                      "v": "rfgaravello"
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "ref",
+                "v": "refs/heads/main"
+              },
+              {
+                "k": "repository",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "allow_forking",
+                      "v": true
+                    },
+                    {
+                      "k": "archive_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/{archive_format}{/ref}"
+                    },
+                    {
+                      "k": "archived",
+                      "v": false
+                    },
+                    {
+                      "k": "assignees_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/assignees{/user}"
+                    },
+                    {
+                      "k": "blobs_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/git/blobs{/sha}"
+                    },
+                    {
+                      "k": "branches_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/branches{/branch}"
+                    },
+                    {
+                      "k": "clone_url",
+                      "v": "https://github.com/rfgaravello/CDevOps-Simulation.git"
+                    },
+                    {
+                      "k": "collaborators_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/collaborators{/collaborator}"
+                    },
+                    {
+                      "k": "comments_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/comments{/number}"
+                    },
+                    {
+                      "k": "commits_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/commits{/sha}"
+                    },
+                    {
+                      "k": "compare_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/compare/{base}...{head}"
+                    },
+                    {
+                      "k": "contents_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/contents/{+path}"
+                    },
+                    {
+                      "k": "contributors_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/contributors"
+                    },
+                    {
+                      "k": "created_at",
+                      "v": 1779799115.0
+                    },
+                    {
+                      "k": "default_branch",
+                      "v": "main"
+                    },
+                    {
+                      "k": "deployments_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/deployments"
+                    },
+                    {
+                      "k": "description",
+                      "v": null
+                    },
+                    {
+                      "k": "disabled",
+                      "v": false
+                    },
+                    {
+                      "k": "downloads_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/downloads"
+                    },
+                    {
+                      "k": "events_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/events"
+                    },
+                    {
+                      "k": "fork",
+                      "v": false
+                    },
+                    {
+                      "k": "forks",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "forks_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "forks_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/forks"
+                    },
+                    {
+                      "k": "full_name",
+                      "v": "rfgaravello/CDevOps-Simulation"
+                    },
+                    {
+                      "k": "git_commits_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/git/commits{/sha}"
+                    },
+                    {
+                      "k": "git_refs_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/git/refs{/sha}"
+                    },
+                    {
+                      "k": "git_tags_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/git/tags{/sha}"
+                    },
+                    {
+                      "k": "git_url",
+                      "v": "git://github.com/rfgaravello/CDevOps-Simulation.git"
+                    },
+                    {
+                      "k": "has_discussions",
+                      "v": false
+                    },
+                    {
+                      "k": "has_downloads",
+                      "v": true
+                    },
+                    {
+                      "k": "has_issues",
+                      "v": true
+                    },
+                    {
+                      "k": "has_pages",
+                      "v": false
+                    },
+                    {
+                      "k": "has_projects",
+                      "v": true
+                    },
+                    {
+                      "k": "has_pull_requests",
+                      "v": true
+                    },
+                    {
+                      "k": "has_wiki",
+                      "v": true
+                    },
+                    {
+                      "k": "homepage",
+                      "v": null
+                    },
+                    {
+                      "k": "hooks_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/hooks"
+                    },
+                    {
+                      "k": "html_url",
+                      "v": "https://github.com/rfgaravello/CDevOps-Simulation"
+                    },
+                    {
+                      "k": "id",
+                      "v": 1250234487.0
+                    },
+                    {
+                      "k": "is_template",
+                      "v": false
+                    },
+                    {
+                      "k": "issue_comment_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/issues/comments{/number}"
+                    },
+                    {
+                      "k": "issue_events_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/issues/events{/number}"
+                    },
+                    {
+                      "k": "issues_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/issues{/number}"
+                    },
+                    {
+                      "k": "keys_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/keys{/key_id}"
+                    },
+                    {
+                      "k": "labels_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/labels{/name}"
+                    },
+                    {
+                      "k": "language",
+                      "v": "JavaScript"
+                    },
+                    {
+                      "k": "languages_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/languages"
+                    },
+                    {
+                      "k": "license",
+                      "v": null
+                    },
+                    {
+                      "k": "master_branch",
+                      "v": "main"
+                    },
+                    {
+                      "k": "merges_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/merges"
+                    },
+                    {
+                      "k": "milestones_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/milestones{/number}"
+                    },
+                    {
+                      "k": "mirror_url",
+                      "v": null
+                    },
+                    {
+                      "k": "name",
+                      "v": "CDevOps-Simulation"
+                    },
+                    {
+                      "k": "node_id",
+                      "v": "R_kgDOSoUQdw"
+                    },
+                    {
+                      "k": "notifications_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/notifications{?since,all,participating}"
+                    },
+                    {
+                      "k": "open_issues",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "open_issues_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "owner",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "avatar_url",
+                            "v": "https://avatars.githubusercontent.com/u/26578436?v=4"
+                          },
+                          {
+                            "k": "email",
+                            "v": "shokopoka@gmail.com"
+                          },
+                          {
+                            "k": "events_url",
+                            "v": "https://api.github.com/users/rfgaravello/events{/privacy}"
+                          },
+                          {
+                            "k": "followers_url",
+                            "v": "https://api.github.com/users/rfgaravello/followers"
+                          },
+                          {
+                            "k": "following_url",
+                            "v": "https://api.github.com/users/rfgaravello/following{/other_user}"
+                          },
+                          {
+                            "k": "gists_url",
+                            "v": "https://api.github.com/users/rfgaravello/gists{/gist_id}"
+                          },
+                          {
+                            "k": "gravatar_id",
+                            "v": ""
+                          },
+                          {
+                            "k": "html_url",
+                            "v": "https://github.com/rfgaravello"
+                          },
+                          {
+                            "k": "id",
+                            "v": 26578436.0
+                          },
+                          {
+                            "k": "login",
+                            "v": "rfgaravello"
+                          },
+                          {
+                            "k": "name",
+                            "v": "rfgaravello"
+                          },
+                          {
+                            "k": "node_id",
+                            "v": "MDQ6VXNlcjI2NTc4NDM2"
+                          },
+                          {
+                            "k": "organizations_url",
+                            "v": "https://api.github.com/users/rfgaravello/orgs"
+                          },
+                          {
+                            "k": "received_events_url",
+                            "v": "https://api.github.com/users/rfgaravello/received_events"
+                          },
+                          {
+                            "k": "repos_url",
+                            "v": "https://api.github.com/users/rfgaravello/repos"
+                          },
+                          {
+                            "k": "site_admin",
+                            "v": false
+                          },
+                          {
+                            "k": "starred_url",
+                            "v": "https://api.github.com/users/rfgaravello/starred{/owner}{/repo}"
+                          },
+                          {
+                            "k": "subscriptions_url",
+                            "v": "https://api.github.com/users/rfgaravello/subscriptions"
+                          },
+                          {
+                            "k": "type",
+                            "v": "User"
+                          },
+                          {
+                            "k": "url",
+                            "v": "https://api.github.com/users/rfgaravello"
+                          },
+                          {
+                            "k": "user_view_type",
+                            "v": "public"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "private",
+                      "v": false
+                    },
+                    {
+                      "k": "pull_request_creation_policy",
+                      "v": "all"
+                    },
+                    {
+                      "k": "pulls_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/pulls{/number}"
+                    },
+                    {
+                      "k": "pushed_at",
+                      "v": 1779830281.0
+                    },
+                    {
+                      "k": "releases_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/releases{/id}"
+                    },
+                    {
+                      "k": "size",
+                      "v": 193432.0
+                    },
+                    {
+                      "k": "ssh_url",
+                      "v": "git@github.com:rfgaravello/CDevOps-Simulation.git"
+                    },
+                    {
+                      "k": "stargazers",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "stargazers_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "stargazers_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/stargazers"
+                    },
+                    {
+                      "k": "statuses_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/statuses/{sha}"
+                    },
+                    {
+                      "k": "subscribers_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/subscribers"
+                    },
+                    {
+                      "k": "subscription_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/subscription"
+                    },
+                    {
+                      "k": "svn_url",
+                      "v": "https://github.com/rfgaravello/CDevOps-Simulation"
+                    },
+                    {
+                      "k": "tags_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/tags"
+                    },
+                    {
+                      "k": "teams_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/teams"
+                    },
+                    {
+                      "k": "topics",
+                      "v": {
+                        "t": 1
+                      }
+                    },
+                    {
+                      "k": "trees_url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation/git/trees{/sha}"
+                    },
+                    {
+                      "k": "updated_at",
+                      "v": "2026-05-26T20:46:15Z"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://api.github.com/repos/rfgaravello/CDevOps-Simulation"
+                    },
+                    {
+                      "k": "visibility",
+                      "v": "public"
+                    },
+                    {
+                      "k": "watchers",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "watchers_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "web_commit_signoff_required",
+                      "v": false
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "sender",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "avatar_url",
+                      "v": "https://avatars.githubusercontent.com/u/26578436?v=4"
+                    },
+                    {
+                      "k": "events_url",
+                      "v": "https://api.github.com/users/rfgaravello/events{/privacy}"
+                    },
+                    {
+                      "k": "followers_url",
+                      "v": "https://api.github.com/users/rfgaravello/followers"
+                    },
+                    {
+                      "k": "following_url",
+                      "v": "https://api.github.com/users/rfgaravello/following{/other_user}"
+                    },
+                    {
+                      "k": "gists_url",
+                      "v": "https://api.github.com/users/rfgaravello/gists{/gist_id}"
+                    },
+                    {
+                      "k": "gravatar_id",
+                      "v": ""
+                    },
+                    {
+                      "k": "html_url",
+                      "v": "https://github.com/rfgaravello"
+                    },
+                    {
+                      "k": "id",
+                      "v": 26578436.0
+                    },
+                    {
+                      "k": "login",
+                      "v": "rfgaravello"
+                    },
+                    {
+                      "k": "node_id",
+                      "v": "MDQ6VXNlcjI2NTc4NDM2"
+                    },
+                    {
+                      "k": "organizations_url",
+                      "v": "https://api.github.com/users/rfgaravello/orgs"
+                    },
+                    {
+                      "k": "received_events_url",
+                      "v": "https://api.github.com/users/rfgaravello/received_events"
+                    },
+                    {
+                      "k": "repos_url",
+                      "v": "https://api.github.com/users/rfgaravello/repos"
+                    },
+                    {
+                      "k": "site_admin",
+                      "v": false
+                    },
+                    {
+                      "k": "starred_url",
+                      "v": "https://api.github.com/users/rfgaravello/starred{/owner}{/repo}"
+                    },
+                    {
+                      "k": "subscriptions_url",
+                      "v": "https://api.github.com/users/rfgaravello/subscriptions"
+                    },
+                    {
+                      "k": "type",
+                      "v": "User"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://api.github.com/users/rfgaravello"
+                    },
+                    {
+                      "k": "user_view_type",
+                      "v": "public"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "k": "workflow_ref",
+          "v": "rfgaravello/CDevOps-Simulation/.github/workflows/ci-cd.yml@refs/heads/main"
+        },
+        {
+          "k": "workflow_sha",
+          "v": "7368170009c631fede114bfd312e2f95ded8561c"
+        },
+        {
+          "k": "repository_id",
+          "v": "1250234487"
+        },
+        {
+          "k": "triggering_actor",
+          "v": "rfgaravello"
+        }
+      ]
+    },
+    "inputs": {
+      "t": 2
+    },
+    "job": {
+      "t": 2,
+      "d": [
+        {
+          "k": "check_run_id",
+          "v": 77960684074.0
+        },
+        {
+          "k": "workflow_ref",
+          "v": "rfgaravello/CDevOps-Simulation/.github/workflows/ci-cd.yml@refs/heads/main"
+        },
+        {
+          "k": "workflow_sha",
+          "v": "7368170009c631fede114bfd312e2f95ded8561c"
+        },
+        {
+          "k": "workflow_repository",
+          "v": "rfgaravello/CDevOps-Simulation"
+        },
+        {
+          "k": "workflow_file_path",
+          "v": ".github/workflows/ci-cd.yml"
+        }
+      ]
+    },
+    "matrix": null,
+    "needs": {
+      "t": 2,
+      "d": [
+        {
+          "k": "lint-and-test",
+          "v": {
+            "t": 2,
+            "d": [
+              {
+                "k": "result",
+                "v": "success"
+              },
+              {
+                "k": "outputs",
+                "v": {
+                  "t": 2
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "strategy": {
+      "t": 2,
+      "d": [
+        {
+          "k": "fail-fast",
+          "v": true
+        },
+        {
+          "k": "job-index",
+          "v": 0.0
+        },
+        {
+          "k": "job-total",
+          "v": 1.0
+        },
+        {
+          "k": "max-parallel",
+          "v": 1.0
+        }
+      ]
+    },
+    "vars": {
+      "t": 2
+    }
+  },
+  "billingOwnerId": "U_kgDOAZWOBA"
+}
+[2026-05-26 21:18:00Z INFO JobRunner] Job ID fe8d5c90-66ed-50ee-9f32-e8e5a27982fd
+[2026-05-26 21:18:00Z INFO ConfigurationStore] currentAssemblyLocation: C:\CDevOps-Simulation\actions-runner\bin\Runner.Worker.dll
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:00Z INFO ConfigurationStore] binPath: C:\CDevOps-Simulation\actions-runner\bin
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:00Z INFO ConfigurationStore] RootFolder: C:\CDevOps-Simulation\actions-runner
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:00Z INFO HostContext] Well known config file 'Runner': 'C:\CDevOps-Simulation\actions-runner\.runner'
+[2026-05-26 21:18:00Z INFO ConfigurationStore] ConfigFilePath: C:\CDevOps-Simulation\actions-runner\.runner
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:00Z INFO HostContext] Well known config file 'MigratedRunner': 'C:\CDevOps-Simulation\actions-runner\.runner_migrated'
+[2026-05-26 21:18:00Z INFO ConfigurationStore] MigratedConfigFilePath: C:\CDevOps-Simulation\actions-runner\.runner_migrated
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:00Z INFO HostContext] Well known config file 'Credentials': 'C:\CDevOps-Simulation\actions-runner\.credentials'
+[2026-05-26 21:18:00Z INFO ConfigurationStore] CredFilePath: C:\CDevOps-Simulation\actions-runner\.credentials
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:00Z INFO HostContext] Well known config file 'MigratedCredentials': 'C:\CDevOps-Simulation\actions-runner\.credentials_migrated'
+[2026-05-26 21:18:00Z INFO ConfigurationStore] MigratedCredFilePath: C:\CDevOps-Simulation\actions-runner\.credentials_migrated
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:00Z INFO HostContext] Well known config file 'Service': 'C:\CDevOps-Simulation\actions-runner\.service'
+[2026-05-26 21:18:00Z INFO ConfigurationStore] ServiceConfigFilePath: C:\CDevOps-Simulation\actions-runner\.service
+[2026-05-26 21:18:00Z INFO ConfigurationStore] Read setting file: 403 chars
+[2026-05-26 21:18:00Z INFO JobRunner] Initializing launch client
+[2026-05-26 21:18:00Z INFO JobServerQueue] Initializing results client
+[2026-05-26 21:18:00Z INFO ResultServer] Creating websocket client ...wss://results-receiver.actions.githubusercontent.com/_ws/ingest.sock
+[2026-05-26 21:18:00Z INFO ResultServer] Attempting to start websocket client with delay 00:00:00.
+[2026-05-26 21:18:00Z INFO JobServerQueue] Start process web console line queue.
+[2026-05-26 21:18:00Z INFO JobServerQueue] Start process file upload queue.
+[2026-05-26 21:18:00Z INFO JobServerQueue] Start results file upload queue.
+[2026-05-26 21:18:00Z INFO JobServerQueue] Starting results-based upload queue...
+[2026-05-26 21:18:00Z INFO JobServerQueue] Start process timeline update queue.
+[2026-05-26 21:18:00Z INFO ExecutionContext] Initializing Job context
+[2026-05-26 21:18:00Z INFO ExecutionContext] Initialize GitHub context
+[2026-05-26 21:18:00Z INFO ExecutionContext] Initialize Env context
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:00Z INFO JobRunner] Starting the job execution context.
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:00Z INFO JobRunner] Validating directory permissions for: 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Tools': 'C:\CDevOps-Simulation\actions-runner\_work\_tool'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:00Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:18:01Z INFO JobRunner] Getting job extension.
+[2026-05-26 21:18:01Z INFO JobRunner] Initialize job. Getting all job steps.
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:01Z INFO HostContext] Well known config file 'Credentials': 'C:\CDevOps-Simulation\actions-runner\.credentials'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:01Z INFO HostContext] Well known config file 'SetupInfo': 'C:\CDevOps-Simulation\actions-runner\.setup_info'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:01Z INFO PipelineDirectoryManager] Loading tracking config if exists: C:\CDevOps-Simulation\actions-runner\_work\_PipelineMapping\rfgaravello/CDevOps-Simulation\PipelineFolder.json
+[2026-05-26 21:18:01Z INFO PipelineDirectoryManager] Updating job run properties.
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:01Z INFO JobExtension] Downloading actions
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Actions': 'C:\CDevOps-Simulation\actions-runner\_work\_actions'
+[2026-05-26 21:18:01Z INFO Worker] Listening for cancel message from the channel.
+[2026-05-26 21:18:01Z INFO Worker] Waiting for the job to complete or for a cancel message from the channel.
+[2026-05-26 21:18:01Z INFO ResultServer] Successfully started websocket client.
+[2026-05-26 21:18:01Z INFO JobServerQueue] Try to append 1 batches web console lines for record '0b9fee09-957f-493e-859a-ea0b00c751c0', success rate: 1/1.
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Actions': 'C:\CDevOps-Simulation\actions-runner\_work\_actions'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:01Z INFO HostContext] Well known directory 'Actions': 'C:\CDevOps-Simulation\actions-runner\_work\_actions'
+[2026-05-26 21:18:01Z INFO ActionManager] Save archive 'https://codeload.github.com/actions/checkout/zip/34e114876b0b11c390a56381ad16ebd13914f8d5' into C:\CDevOps-Simulation\actions-runner\_work\_actions\_temp_4493b3c9-a73c-4f08-9c12-e1ff24778db2\60401589-f6aa-4029-bf18-ad84e947830b.zip.
+[2026-05-26 21:18:01Z INFO ActionManager] Using Basic token for action archive download.
+[2026-05-26 21:18:01Z INFO JobServerQueue] Job timeline record has been updated for the first time.
+[2026-05-26 21:18:02Z INFO JobServerQueue] Try to append 1 batches web console lines for record '0b9fee09-957f-493e-859a-ea0b00c751c0', success rate: 1/1.
+[2026-05-26 21:18:02Z INFO ActionManager] Request URL: https://codeload.github.com/actions/checkout/zip/34e114876b0b11c390a56381ad16ebd13914f8d5 X-GitHub-Request-Id: DE31:C6264:1A5F2:32452:6A160E23 Http Status: OK
+[2026-05-26 21:18:03Z INFO ActionManager] Finished getting action repository.
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Actions': 'C:\CDevOps-Simulation\actions-runner\_work\_actions'
+[2026-05-26 21:18:03Z INFO ActionManifestManagerLegacy] Load schema file with definitions: [
+  "null",
+  "boolean",
+  "number",
+  "string",
+  "sequence",
+  "mapping",
+  "any",
+  "action-root",
+  "inputs",
+  "input",
+  "outputs",
+  "output-definition",
+  "runs",
+  "container-runs",
+  "container-runs-args",
+  "container-runs-env",
+  "node-runs",
+  "plugin-runs",
+  "composite-runs",
+  "composite-steps",
+  "composite-step",
+  "run-step",
+  "uses-step",
+  "container-runs-context",
+  "output-value",
+  "input-default-context",
+  "non-empty-string",
+  "string-steps-context",
+  "boolean-steps-context",
+  "step-env",
+  "step-if",
+  "step-with"
+]
+[2026-05-26 21:18:03Z INFO ActionManifestManager] Load schema file with definitions: [
+  "null",
+  "boolean",
+  "number",
+  "string",
+  "sequence",
+  "mapping",
+  "any",
+  "action-root",
+  "inputs",
+  "input",
+  "outputs",
+  "output-definition",
+  "runs",
+  "container-runs",
+  "container-runs-args",
+  "container-runs-env",
+  "node-runs",
+  "plugin-runs",
+  "composite-runs",
+  "composite-steps",
+  "composite-step",
+  "run-step",
+  "uses-step",
+  "container-runs-context",
+  "output-value",
+  "input-default-context",
+  "non-empty-string",
+  "string-steps-context",
+  "boolean-steps-context",
+  "step-env",
+  "step-if",
+  "step-with"
+]
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Actions': 'C:\CDevOps-Simulation\actions-runner\_work\_actions'
+[2026-05-26 21:18:03Z INFO ActionManifestManagerLegacy] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2026-05-26 21:18:03Z INFO ActionManager] Action node.js file: dist/index.js, no more preparation.
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Actions': 'C:\CDevOps-Simulation\actions-runner\_work\_actions'
+[2026-05-26 21:18:03Z INFO ActionManager] Load action that reference repository from 'C:\CDevOps-Simulation\actions-runner\_work\_actions\actions\checkout\v4'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Actions': 'C:\CDevOps-Simulation\actions-runner\_work\_actions'
+[2026-05-26 21:18:03Z INFO ActionManifestManagerLegacy] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2026-05-26 21:18:03Z INFO ActionManager] Action pre node.js file: N/A.
+[2026-05-26 21:18:03Z INFO ActionManager] Action node.js file: dist/index.js.
+[2026-05-26 21:18:03Z INFO ActionManager] Action post node.js file: dist/index.js.
+[2026-05-26 21:18:03Z INFO JobExtension] Adding .
+[2026-05-26 21:18:03Z INFO JobExtension] Adding .
+[2026-05-26 21:18:03Z INFO JobExtension] Adding .
+[2026-05-26 21:18:03Z INFO JobExtension] Adding .
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:03Z INFO JobServerQueue] Try to append 1 batches web console lines for record '0b9fee09-957f-493e-859a-ea0b00c751c0', success rate: 1/1.
+[2026-05-26 21:18:03Z INFO JobExtension] Total accessible running process: 386.
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:03Z INFO JobExtension] Start checking server connectivity.
+[2026-05-26 21:18:03Z INFO JobExtension] Check server connectivity for https://broker.actions.githubusercontent.com/health.
+[2026-05-26 21:18:03Z INFO JobExtension] Check server connectivity for https://token.actions.githubusercontent.com/ready.
+[2026-05-26 21:18:03Z INFO JobExtension] Check server connectivity for https://run.actions.githubusercontent.com/health.
+[2026-05-26 21:18:03Z INFO JobExtension] Start checking service connectivity in background.
+[2026-05-26 21:18:03Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "setup_job",
+  "type": "runner",
+  "stage": "Pre",
+  "stepId": "0b9fee09-957f-493e-859a-ea0b00c751c0",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 3,
+  "startTime": "2026-05-26T21:18:01.0280217Z",
+  "finishTime": "2026-05-26T21:18:03.4090841Z"
+}.
+[2026-05-26 21:18:03Z INFO JobRunner] Total job steps: 4.
+[2026-05-26 21:18:03Z INFO JobRunner] Run all job steps.
+[2026-05-26 21:18:03Z INFO DapDebugger] DapDebugger initialized
+[2026-05-26 21:18:03Z INFO StepsRunner] Processing step: DisplayName='Run actions/checkout@v4'
+[2026-05-26 21:18:03Z INFO StepsRunner] Evaluating: success()
+[2026-05-26 21:18:03Z INFO StepsRunner] Result: true
+[2026-05-26 21:18:03Z INFO StepsRunner] Starting the step.
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:03Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:03Z INFO StepsRunner] Which2: 'chcp'
+[2026-05-26 21:18:03Z INFO StepsRunner] Location: 'C:\Windows\system32\chcp.COM'
+[2026-05-26 21:18:03Z INFO ProcessInvokerWrapper] Starting process:
+[2026-05-26 21:18:03Z INFO ProcessInvokerWrapper]   File name: 'C:\Windows\system32\chcp.COM'
+[2026-05-26 21:18:03Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-05-26 21:18:03Z INFO ProcessInvokerWrapper]   Working directory: 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:03Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-05-26 21:18:03Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-05-26 21:18:03Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-05-26 21:18:03Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-05-26 21:18:03Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-05-26 21:18:03Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-05-26 21:18:03Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-05-26 21:18:03Z INFO ProcessInvokerWrapper] Process started with process id 34568, waiting for process exit.
+[2026-05-26 21:18:03Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-05-26 21:18:03Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, C:\CDevOps-Simulation\actions-runner\_diag\blocks\1a2e398a-0517-4c10-9326-3c72b87ed195_0b9fee09-957f-493e-859a-ea0b00c751c0.1
+[2026-05-26 21:18:04Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper] Finished process 34568 with exit code 0, and elapsed time 00:00:00.5864710.
+[2026-05-26 21:18:04Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Actions': 'C:\CDevOps-Simulation\actions-runner\_work\_actions'
+[2026-05-26 21:18:04Z INFO ActionManager] Load action that reference repository from 'C:\CDevOps-Simulation\actions-runner\_work\_actions\actions\checkout\v4'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Actions': 'C:\CDevOps-Simulation\actions-runner\_work\_actions'
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2026-05-26 21:18:04Z INFO ActionManager] Action pre node.js file: N/A.
+[2026-05-26 21:18:04Z INFO ActionManager] Action node.js file: dist/index.js.
+[2026-05-26 21:18:04Z INFO ActionManager] Action post node.js file: dist/index.js.
+[2026-05-26 21:18:04Z INFO ExecutionContext] Reserve record order 6 to 10 for post job actions.
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:18:04Z INFO ExecutionContext] Write event payload to C:\CDevOps-Simulation\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:18:04Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddPathFileCommand, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetEnvFileCommand, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.CreateStepSummaryCommand, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SaveStateFileCommand, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetOutputFileCommand, Runner.Worker
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'repository': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 6,
+  "col": 14,
+  "lit": "rfgaravello/CDevOps-Simulation"
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'ref': default value evaluate result: ""
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'token': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 24,
+  "col": 14,
+  "lit": "***"
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'ssh-key': default value evaluate result: ""
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'ssh-known-hosts': default value evaluate result: ""
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'ssh-strict': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 47,
+  "col": 14,
+  "lit": "true"
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'ssh-user': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 51,
+  "col": 14,
+  "lit": "git"
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'persist-credentials': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 54,
+  "col": 14,
+  "lit": "true"
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'path': default value evaluate result: ""
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'clean': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 59,
+  "col": 14,
+  "lit": "true"
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'filter': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 64,
+  "col": 14,
+  "lit": ""
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'sparse-checkout': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 69,
+  "col": 14,
+  "lit": ""
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'sparse-checkout-cone-mode': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 73,
+  "col": 14,
+  "lit": "true"
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'fetch-depth': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 76,
+  "col": 14,
+  "lit": "1"
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'fetch-tags': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 79,
+  "col": 14,
+  "lit": "false"
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'show-progress': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 82,
+  "col": 14,
+  "lit": "true"
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'lfs': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 85,
+  "col": 14,
+  "lit": "false"
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'submodules': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 94,
+  "col": 14,
+  "lit": "false"
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'set-safe-directory': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 97,
+  "col": 14,
+  "lit": "true"
+}
+[2026-05-26 21:18:04Z INFO ActionManifestManagerLegacy] Input 'github-server-url': default value evaluate result: ""
+[2026-05-26 21:18:04Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.InternalPluginSetRepoPathCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetEnvCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetOutputCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SaveStateCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddPathCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddMaskCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddMatcherCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.RemoveMatcherCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.WarningCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.ErrorCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.NoticeCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.DebugCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.GroupCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.EndGroupCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.EchoCommandExtension, Runner.Worker
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command error
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command group
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-05-26 21:18:04Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:04Z INFO HostContext] Well known directory 'Externals': 'C:\CDevOps-Simulation\actions-runner\externals'
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper] Starting process:
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper]   File name: 'C:\CDevOps-Simulation\actions-runner\externals\node20\bin\node.exe'
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper]   Arguments: '"C:\CDevOps-Simulation\actions-runner\_work\_actions\actions\checkout\v4\dist/index.js"'
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper]   Working directory: 'C:\CDevOps-Simulation\actions-runner\_work\CDevOps-Simulation\CDevOps-Simulation'
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper]   Encoding web name: utf-8 ; code page: '65001'
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-05-26 21:18:04Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:04Z INFO ProcessInvokerWrapper] Process started with process id 33872, waiting for process exit.
+[2026-05-26 21:18:05Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:05Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2026-05-26 21:18:06Z INFO AddMaskCommandExtension] Add new secret mask with length of 76
+[2026-05-26 21:18:06Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:07Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:07Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:08Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:08Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:13Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:13Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:13Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:14Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:14Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:15Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:17Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:18Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:19Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:20Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:21Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper] Finished process 33872 with exit code 0, and elapsed time 00:00:17.2559395.
+[2026-05-26 21:18:21Z INFO CreateStepSummaryCommand] Step Summary file (C:\CDevOps-Simulation\actions-runner\_work\_temp\_runner_file_commands\step_summary_46ab2bd7-e7db-42d7-a20c-cf2c597fabd2) is empty; skipping attachment upload
+[2026-05-26 21:18:21Z INFO StepsRunner] Step result: 
+[2026-05-26 21:18:21Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "actions/checkout",
+  "ref": "v4",
+  "type": "node20",
+  "stage": "Main",
+  "stepId": "5bc7c458-e28c-48f8-b67b-d414df85ded6",
+  "stepContextName": "__actions_checkout",
+  "hasPreStep": false,
+  "hasPostStep": true,
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 18,
+  "startTime": "2026-05-26T21:18:03.4248523Z",
+  "finishTime": "2026-05-26T21:18:21.3727082Z"
+}.
+[2026-05-26 21:18:21Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2026-05-26 21:18:21Z INFO StepsRunner] Current state: job state = ''
+[2026-05-26 21:18:21Z INFO StepsRunner] Processing step: DisplayName='Enviar Imagem Docker para o ambiente do Minikube'
+[2026-05-26 21:18:21Z INFO StepsRunner] Evaluating: success()
+[2026-05-26 21:18:21Z INFO StepsRunner] Result: true
+[2026-05-26 21:18:21Z INFO StepsRunner] Starting the step.
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:21Z INFO StepsRunner] Which2: 'chcp'
+[2026-05-26 21:18:21Z INFO StepsRunner] Location: 'C:\Windows\system32\chcp.COM'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper] Starting process:
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   File name: 'C:\Windows\system32\chcp.COM'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Working directory: 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper] Process started with process id 36676, waiting for process exit.
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper] Finished process 36676 with exit code 0, and elapsed time 00:00:00.0198067.
+[2026-05-26 21:18:21Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:18:21Z INFO ExecutionContext] Write event payload to C:\CDevOps-Simulation\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:18:21Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-05-26 21:18:21Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command error
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command group
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-05-26 21:18:21Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-05-26 21:18:21Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-05-26 21:18:21Z INFO ScriptHandler] pwsh: command not found. Make sure 'pwsh' is installed and its location included in the 'Path' environment variable.
+[2026-05-26 21:18:21Z INFO ScriptHandler] Defaulting to powershell
+[2026-05-26 21:18:21Z INFO ScriptHandler] Which2: 'powershell'
+[2026-05-26 21:18:21Z INFO ScriptHandler] Location: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:21Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:18:21Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-05-26 21:18:21Z INFO ScriptHandler] pwsh: command not found. Make sure 'pwsh' is installed and its location included in the 'Path' environment variable.
+[2026-05-26 21:18:21Z INFO ScriptHandler] Defaulting to powershell
+[2026-05-26 21:18:21Z INFO ScriptHandler] Which2: 'powershell'
+[2026-05-26 21:18:21Z INFO ScriptHandler] Location: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper] Starting process:
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   File name: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Arguments: '-command ". 'C:\CDevOps-Simulation\actions-runner\_work\_temp\dfd90f29-95c7-40a4-9202-8e2b63810a9a.ps1'"'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Working directory: 'C:\CDevOps-Simulation\actions-runner\_work\CDevOps-Simulation\CDevOps-Simulation'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-05-26 21:18:21Z INFO ProcessInvokerWrapper] Process started with process id 26848, waiting for process exit.
+[2026-05-26 21:18:21Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5bc7c458-e28c-48f8-b67b-d414df85ded6', success rate: 1/1.
+[2026-05-26 21:18:21Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b7415c6b-cd8c-4e56-8788-cc75cbf4bd25', success rate: 1/1.
+[2026-05-26 21:18:21Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-05-26 21:18:21Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, C:\CDevOps-Simulation\actions-runner\_diag\blocks\1a2e398a-0517-4c10-9326-3c72b87ed195_5bc7c458-e28c-48f8-b67b-d414df85ded6.1
+[2026-05-26 21:18:22Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b7415c6b-cd8c-4e56-8788-cc75cbf4bd25', success rate: 1/1.
+[2026-05-26 21:18:22Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2026-05-26 21:18:22Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2026-05-26 21:18:23Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:23Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:23Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:33Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:33Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:33Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:43Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:43Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:43Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:46Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b7415c6b-cd8c-4e56-8788-cc75cbf4bd25', success rate: 1/1.
+[2026-05-26 21:18:47Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b7415c6b-cd8c-4e56-8788-cc75cbf4bd25', success rate: 1/1.
+[2026-05-26 21:18:48Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b7415c6b-cd8c-4e56-8788-cc75cbf4bd25', success rate: 1/1.
+[2026-05-26 21:18:48Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'b7415c6b-cd8c-4e56-8788-cc75cbf4bd25', success rate: 1/1.
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper] Finished process 26848 with exit code 0, and elapsed time 00:00:27.4613588.
+[2026-05-26 21:18:48Z INFO CreateStepSummaryCommand] Step Summary file (C:\CDevOps-Simulation\actions-runner\_work\_temp\_runner_file_commands\step_summary_398c1170-afd0-47a2-8c67-5f1f77b7b1f8) is empty; skipping attachment upload
+[2026-05-26 21:18:48Z INFO StepsRunner] Step result: 
+[2026-05-26 21:18:48Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "powershell",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "b7415c6b-cd8c-4e56-8788-cc75cbf4bd25",
+  "stepContextName": "__run",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 28,
+  "startTime": "2026-05-26T21:18:21.3741025Z",
+  "finishTime": "2026-05-26T21:18:48.9046263Z"
+}.
+[2026-05-26 21:18:48Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2026-05-26 21:18:48Z INFO StepsRunner] Current state: job state = ''
+[2026-05-26 21:18:48Z INFO StepsRunner] Processing step: DisplayName='Executar Terraform (IaC)'
+[2026-05-26 21:18:48Z INFO StepsRunner] Evaluating: success()
+[2026-05-26 21:18:48Z INFO StepsRunner] Result: true
+[2026-05-26 21:18:48Z INFO StepsRunner] Starting the step.
+[2026-05-26 21:18:48Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:48Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:48Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:48Z INFO StepsRunner] Which2: 'chcp'
+[2026-05-26 21:18:48Z INFO StepsRunner] Location: 'C:\Windows\system32\chcp.COM'
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper] Starting process:
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper]   File name: 'C:\Windows\system32\chcp.COM'
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper]   Working directory: 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-05-26 21:18:48Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-05-26 21:18:49Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2026-05-26 21:18:49Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-05-26 21:18:49Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, C:\CDevOps-Simulation\actions-runner\_diag\blocks\1a2e398a-0517-4c10-9326-3c72b87ed195_b7415c6b-cd8c-4e56-8788-cc75cbf4bd25.1
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper] Process started with process id 10344, waiting for process exit.
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper] Finished process 10344 with exit code 0, and elapsed time 00:00:01.3961167.
+[2026-05-26 21:18:50Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-05-26 21:18:50Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:50Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:50Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:50Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:18:50Z INFO ExecutionContext] Write event payload to C:\CDevOps-Simulation\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-05-26 21:18:50Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:50Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:50Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:50Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:18:50Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-05-26 21:18:50Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command error
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command group
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-05-26 21:18:50Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-05-26 21:18:50Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-05-26 21:18:50Z INFO ScriptHandler] pwsh: command not found. Make sure 'pwsh' is installed and its location included in the 'Path' environment variable.
+[2026-05-26 21:18:50Z INFO ScriptHandler] Defaulting to powershell
+[2026-05-26 21:18:50Z INFO ScriptHandler] Which2: 'powershell'
+[2026-05-26 21:18:50Z INFO ScriptHandler] Location: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-05-26 21:18:50Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:50Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:50Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:50Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:18:50Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-05-26 21:18:50Z INFO ScriptHandler] pwsh: command not found. Make sure 'pwsh' is installed and its location included in the 'Path' environment variable.
+[2026-05-26 21:18:50Z INFO ScriptHandler] Defaulting to powershell
+[2026-05-26 21:18:50Z INFO ScriptHandler] Which2: 'powershell'
+[2026-05-26 21:18:50Z INFO ScriptHandler] Location: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper] Starting process:
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper]   File name: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper]   Arguments: '-command ". 'C:\CDevOps-Simulation\actions-runner\_work\_temp\f6f839eb-fc66-43dc-b747-a47da4817ad8.ps1'"'
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper]   Working directory: 'C:\CDevOps-Simulation\actions-runner\_work\CDevOps-Simulation\CDevOps-Simulation'
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-05-26 21:18:50Z INFO ProcessInvokerWrapper] Process started with process id 35996, waiting for process exit.
+[2026-05-26 21:18:50Z INFO JobServerQueue] Try to append 1 batches web console lines for record '71a4289e-7cc2-4908-8baa-80b58ffa89c1', success rate: 1/1.
+[2026-05-26 21:18:50Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2026-05-26 21:18:50Z INFO JobServerQueue] Try to append 1 batches web console lines for record '71a4289e-7cc2-4908-8baa-80b58ffa89c1', success rate: 1/1.
+[2026-05-26 21:18:51Z INFO JobServerQueue] Try to append 1 batches web console lines for record '71a4289e-7cc2-4908-8baa-80b58ffa89c1', success rate: 1/1.
+[2026-05-26 21:18:52Z INFO JobServerQueue] Try to append 1 batches web console lines for record '71a4289e-7cc2-4908-8baa-80b58ffa89c1', success rate: 1/1.
+[2026-05-26 21:18:53Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:53Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:53Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:59Z INFO JobServerQueue] Try to append 1 batches web console lines for record '71a4289e-7cc2-4908-8baa-80b58ffa89c1', success rate: 1/1.
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:59Z INFO JobServerQueue] Try to append 1 batches web console lines for record '71a4289e-7cc2-4908-8baa-80b58ffa89c1', success rate: 1/1.
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper] Finished process 35996 with exit code 0, and elapsed time 00:00:09.3025289.
+[2026-05-26 21:18:59Z INFO CreateStepSummaryCommand] Step Summary file (C:\CDevOps-Simulation\actions-runner\_work\_temp\_runner_file_commands\step_summary_1cde575e-155a-4e59-8572-c28bd00fa683) is empty; skipping attachment upload
+[2026-05-26 21:18:59Z INFO StepsRunner] Step result: 
+[2026-05-26 21:18:59Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "powershell",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "71a4289e-7cc2-4908-8baa-80b58ffa89c1",
+  "stepContextName": "__run_2",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 11,
+  "startTime": "2026-05-26T21:18:48.9090244Z",
+  "finishTime": "2026-05-26T21:18:59.660868Z"
+}.
+[2026-05-26 21:18:59Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2026-05-26 21:18:59Z INFO StepsRunner] Current state: job state = ''
+[2026-05-26 21:18:59Z INFO StepsRunner] Processing step: DisplayName='Executar Auditoria de Disponibilidade (Healthcheck)'
+[2026-05-26 21:18:59Z INFO StepsRunner] Evaluating: success()
+[2026-05-26 21:18:59Z INFO StepsRunner] Result: true
+[2026-05-26 21:18:59Z INFO StepsRunner] Starting the step.
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:59Z INFO StepsRunner] Which2: 'chcp'
+[2026-05-26 21:18:59Z INFO StepsRunner] Location: 'C:\Windows\system32\chcp.COM'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper] Starting process:
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   File name: 'C:\Windows\system32\chcp.COM'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Working directory: 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper] Process started with process id 23420, waiting for process exit.
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper] Finished process 23420 with exit code 0, and elapsed time 00:00:00.0309258.
+[2026-05-26 21:18:59Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:18:59Z INFO ExecutionContext] Write event payload to C:\CDevOps-Simulation\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:18:59Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-05-26 21:18:59Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command error
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command group
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-05-26 21:18:59Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-05-26 21:18:59Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-05-26 21:18:59Z INFO ScriptHandler] pwsh: command not found. Make sure 'pwsh' is installed and its location included in the 'Path' environment variable.
+[2026-05-26 21:18:59Z INFO ScriptHandler] Defaulting to powershell
+[2026-05-26 21:18:59Z INFO ScriptHandler] Which2: 'powershell'
+[2026-05-26 21:18:59Z INFO ScriptHandler] Location: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:18:59Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:18:59Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-05-26 21:18:59Z INFO ScriptHandler] pwsh: command not found. Make sure 'pwsh' is installed and its location included in the 'Path' environment variable.
+[2026-05-26 21:18:59Z INFO ScriptHandler] Defaulting to powershell
+[2026-05-26 21:18:59Z INFO ScriptHandler] Which2: 'powershell'
+[2026-05-26 21:18:59Z INFO ScriptHandler] Location: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper] Starting process:
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   File name: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.EXE'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Arguments: '-command ". 'C:\CDevOps-Simulation\actions-runner\_work\_temp\89904164-3832-46e4-acdd-a736111d3e09.ps1'"'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Working directory: 'C:\CDevOps-Simulation\actions-runner\_work\CDevOps-Simulation\CDevOps-Simulation'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-05-26 21:18:59Z INFO ProcessInvokerWrapper] Process started with process id 36484, waiting for process exit.
+[2026-05-26 21:18:59Z INFO JobServerQueue] Try to append 1 batches web console lines for record '03c6bab2-4d64-402f-ac44-ce330c44fcc4', success rate: 1/1.
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper] Finished process 36484 with exit code 1, and elapsed time 00:00:00.6304018.
+[2026-05-26 21:19:00Z INFO CreateStepSummaryCommand] Step Summary file (C:\CDevOps-Simulation\actions-runner\_work\_temp\_runner_file_commands\step_summary_8a020b79-709f-4b74-af90-f06ba7b96055) is empty; skipping attachment upload
+[2026-05-26 21:19:00Z INFO StepsRunner] Step result: Failed
+[2026-05-26 21:19:00Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "powershell",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "03c6bab2-4d64-402f-ac44-ce330c44fcc4",
+  "stepContextName": "__run_3",
+  "result": "failed",
+  "errorMessages": [
+    "Process completed with exit code 1."
+  ],
+  "executionTimeInSeconds": 1,
+  "startTime": "2026-05-26T21:18:59.6620076Z",
+  "finishTime": "2026-05-26T21:19:00.3732155Z"
+}.
+[2026-05-26 21:19:00Z INFO StepsRunner] Update job result with current step result 'Failed'.
+[2026-05-26 21:19:00Z INFO StepsRunner] Current state: job state = 'Failed'
+[2026-05-26 21:19:00Z INFO StepsRunner] Processing step: DisplayName='Post Run actions/checkout@v4'
+[2026-05-26 21:19:00Z INFO StepsRunner] Evaluating: always()
+[2026-05-26 21:19:00Z INFO StepsRunner] Result: true
+[2026-05-26 21:19:00Z INFO StepsRunner] Starting the step.
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:19:00Z INFO StepsRunner] Which2: 'chcp'
+[2026-05-26 21:19:00Z INFO StepsRunner] Location: 'C:\Windows\system32\chcp.COM'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper] Starting process:
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   File name: 'C:\Windows\system32\chcp.COM'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Working directory: 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper] Process started with process id 36108, waiting for process exit.
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper] Finished process 36108 with exit code 0, and elapsed time 00:00:00.0242597.
+[2026-05-26 21:19:00Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Actions': 'C:\CDevOps-Simulation\actions-runner\_work\_actions'
+[2026-05-26 21:19:00Z INFO ActionManager] Load action that reference repository from 'C:\CDevOps-Simulation\actions-runner\_work\_actions\actions\checkout\v4'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Actions': 'C:\CDevOps-Simulation\actions-runner\_work\_actions'
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2026-05-26 21:19:00Z INFO ActionManager] Action pre node.js file: N/A.
+[2026-05-26 21:19:00Z INFO ActionManager] Action node.js file: dist/index.js.
+[2026-05-26 21:19:00Z INFO ActionManager] Action post node.js file: dist/index.js.
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:19:00Z INFO ExecutionContext] Write event payload to C:\CDevOps-Simulation\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Temp': 'C:\CDevOps-Simulation\actions-runner\_work\_temp'
+[2026-05-26 21:19:00Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'repository': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 6,
+  "col": 14,
+  "lit": "rfgaravello/CDevOps-Simulation"
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'ref': default value evaluate result: ""
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'token': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 24,
+  "col": 14,
+  "lit": "***"
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'ssh-key': default value evaluate result: ""
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'ssh-known-hosts': default value evaluate result: ""
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'ssh-strict': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 47,
+  "col": 14,
+  "lit": "true"
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'ssh-user': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 51,
+  "col": 14,
+  "lit": "git"
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'persist-credentials': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 54,
+  "col": 14,
+  "lit": "true"
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'path': default value evaluate result: ""
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'clean': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 59,
+  "col": 14,
+  "lit": "true"
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'filter': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 64,
+  "col": 14,
+  "lit": ""
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'sparse-checkout': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 69,
+  "col": 14,
+  "lit": ""
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'sparse-checkout-cone-mode': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 73,
+  "col": 14,
+  "lit": "true"
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'fetch-depth': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 76,
+  "col": 14,
+  "lit": "1"
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'fetch-tags': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 79,
+  "col": 14,
+  "lit": "false"
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'show-progress': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 82,
+  "col": 14,
+  "lit": "true"
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'lfs': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 85,
+  "col": 14,
+  "lit": "false"
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'submodules': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 94,
+  "col": 14,
+  "lit": "false"
+}
+[2026-05-26 21:19:00Z INFO JobServerQueue] Try to append 1 batches web console lines for record '03c6bab2-4d64-402f-ac44-ce330c44fcc4', success rate: 1/1.
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'set-safe-directory': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 97,
+  "col": 14,
+  "lit": "true"
+}
+[2026-05-26 21:19:00Z INFO ActionManifestManagerLegacy] Input 'github-server-url': default value evaluate result: ""
+[2026-05-26 21:19:00Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-05-26 21:19:00Z INFO JobServerQueue] Try to upload 2 log files or attachments, success rate: 2/2.
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command error
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command group
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-05-26 21:19:00Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:19:00Z INFO HostContext] Well known directory 'Externals': 'C:\CDevOps-Simulation\actions-runner\externals'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper] Starting process:
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   File name: 'C:\CDevOps-Simulation\actions-runner\externals\node20\bin\node.exe'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Arguments: '"C:\CDevOps-Simulation\actions-runner\_work\_actions\actions\checkout\v4\dist/index.js"'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Working directory: 'C:\CDevOps-Simulation\actions-runner\_work\CDevOps-Simulation\CDevOps-Simulation'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Encoding web name: utf-8 ; code page: '65001'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-05-26 21:19:00Z INFO ProcessInvokerWrapper] Process started with process id 32700, waiting for process exit.
+[2026-05-26 21:19:00Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-05-26 21:19:00Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, C:\CDevOps-Simulation\actions-runner\_diag\blocks\1a2e398a-0517-4c10-9326-3c72b87ed195_71a4289e-7cc2-4908-8baa-80b58ffa89c1.1
+[2026-05-26 21:19:00Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'ddfd4be4-26ad-4330-8d80-85032ff380eb', success rate: 1/1.
+[2026-05-26 21:19:00Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'ddfd4be4-26ad-4330-8d80-85032ff380eb', success rate: 1/1.
+[2026-05-26 21:19:00Z INFO AddMaskCommandExtension] Add new secret mask with length of 32
+[2026-05-26 21:19:01Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'ddfd4be4-26ad-4330-8d80-85032ff380eb', success rate: 1/1.
+[2026-05-26 21:19:01Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-05-26 21:19:01Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, C:\CDevOps-Simulation\actions-runner\_diag\blocks\1a2e398a-0517-4c10-9326-3c72b87ed195_03c6bab2-4d64-402f-ac44-ce330c44fcc4.1
+[2026-05-26 21:19:01Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'ddfd4be4-26ad-4330-8d80-85032ff380eb', success rate: 1/1.
+[2026-05-26 21:19:02Z INFO JobServerQueue] Tried to upload 2 file(s) to results, success rate: 2/2.
+[2026-05-26 21:19:03Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:19:03Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:19:03Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:19:03Z INFO JobServerQueue] Stop aggressive process web console line queue.
+[2026-05-26 21:19:04Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'ddfd4be4-26ad-4330-8d80-85032ff380eb', success rate: 1/1.
+[2026-05-26 21:19:04Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'ddfd4be4-26ad-4330-8d80-85032ff380eb', success rate: 1/1.
+[2026-05-26 21:19:08Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'ddfd4be4-26ad-4330-8d80-85032ff380eb', success rate: 1/1.
+[2026-05-26 21:19:13Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:19:13Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:19:13Z INFO HostContext] Well known directory 'Work': 'C:\CDevOps-Simulation\actions-runner\_work'
+[2026-05-26 21:19:14Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:19:14Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-05-26 21:19:14Z INFO ProcessInvokerWrapper] Finished process 32700 with exit code 0, and elapsed time 00:00:14.5250455.
+[2026-05-26 21:19:14Z INFO CreateStepSummaryCommand] Step Summary file (C:\CDevOps-Simulation\actions-runner\_work\_temp\_runner_file_commands\step_summary_73ab9988-06d8-4e12-894d-6fbeb9c38424) is empty; skipping attachment upload
+[2026-05-26 21:19:14Z INFO StepsRunner] Step result: 
+[2026-05-26 21:19:14Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "actions/checkout",
+  "ref": "v4",
+  "type": "node20",
+  "stage": "Post",
+  "stepId": "ddfd4be4-26ad-4330-8d80-85032ff380eb",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 15,
+  "startTime": "2026-05-26T21:19:00.37555Z",
+  "finishTime": "2026-05-26T21:19:14.94502Z"
+}.
+[2026-05-26 21:19:14Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2026-05-26 21:19:14Z INFO StepsRunner] Current state: job state = 'Failed'
+[2026-05-26 21:19:14Z INFO JobRunner] Finalize job.
+[2026-05-26 21:19:14Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:19:14Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:19:14Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:19:14Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:19:14Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:19:14Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:19:14Z INFO JobExtension] Initialize Env context
+[2026-05-26 21:19:14Z INFO JobExtension] Initialize steps context
+[2026-05-26 21:19:14Z INFO JobExtension] Total accessible running process: 390.
+[2026-05-26 21:19:14Z INFO JobExtension] Inspecting process environment variables. PID: 30492 (svchost)
+[2026-05-26 21:19:14Z INFO JobExtension] Inspecting process environment variables. PID: 7920 (backgroundTaskHost)
+[2026-05-26 21:19:14Z INFO JobExtension] Inspecting process environment variables. PID: 22688 (backgroundTaskHost)
+[2026-05-26 21:19:14Z INFO JobExtension] Inspecting process environment variables. PID: 34340 (HxTsr)
+[2026-05-26 21:19:14Z INFO JobExtension] Inspecting process environment variables. PID: 34492 (backgroundTaskHost)
+[2026-05-26 21:19:14Z INFO JobExtension] Inspecting process environment variables. PID: 33368 (RuntimeBroker)
+[2026-05-26 21:19:14Z INFO JobExtension] Inspecting process environment variables. PID: 36976 (svchost)
+[2026-05-26 21:19:15Z INFO JobExtension] Wait for all connectivity checks to finish.
+[2026-05-26 21:19:15Z INFO JobExtension] Connectivity check result: GitHub.Runner.Worker.JobExtension+CheckResult
+[2026-05-26 21:19:15Z INFO JobExtension] Connectivity check result: GitHub.Runner.Worker.JobExtension+CheckResult
+[2026-05-26 21:19:15Z INFO JobExtension] Connectivity check result: GitHub.Runner.Worker.JobExtension+CheckResult
+[2026-05-26 21:19:15Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "complete_job",
+  "type": "runner",
+  "stage": "Post",
+  "stepId": "c643e50a-9cb6-4305-9305-cf24bec81b2d",
+  "result": "succeeded",
+  "errorMessages": [
+    "Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4. Actions will be forced to run with Node.js 24 by default starting June 2nd, 2026. Node.js 20 will be removed from the runn"
+  ],
+  "executionTimeInSeconds": 1,
+  "startTime": "2026-05-26T21:19:14.9512044Z",
+  "finishTime": "2026-05-26T21:19:15.0036768Z"
+}.
+[2026-05-26 21:19:15Z INFO JobRunner] Job result after all job steps finish: Failed
+[2026-05-26 21:19:15Z INFO JobRunner] Completing the job execution context.
+[2026-05-26 21:19:15Z INFO JobRunner] Shutting down the job server queue.
+[2026-05-26 21:19:15Z INFO JobServerQueue] Fire signal to shutdown all queues.
+[2026-05-26 21:19:15Z INFO JobServerQueue] All queue process task stopped.
+[2026-05-26 21:19:15Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'c643e50a-9cb6-4305-9305-cf24bec81b2d', success rate: 1/1.
+[2026-05-26 21:19:15Z INFO JobServerQueue] Web console line queue drained.
+[2026-05-26 21:19:15Z INFO JobServerQueue] Uploading 3 files in one shot.
+[2026-05-26 21:19:15Z INFO JobServerQueue] Try to upload 3 log files or attachments, success rate: 3/3.
+[2026-05-26 21:19:15Z INFO JobServerQueue] File upload queue drained.
+[2026-05-26 21:19:15Z INFO JobServerQueue] Starting results-based upload queue...
+[2026-05-26 21:19:15Z INFO JobServerQueue] Uploading 3 file(s) in one shot through results service.
+[2026-05-26 21:19:15Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-05-26 21:19:15Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, C:\CDevOps-Simulation\actions-runner\_diag\blocks\1a2e398a-0517-4c10-9326-3c72b87ed195_ddfd4be4-26ad-4330-8d80-85032ff380eb.1
+[2026-05-26 21:19:16Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-05-26 21:19:16Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, C:\CDevOps-Simulation\actions-runner\_diag\blocks\1a2e398a-0517-4c10-9326-3c72b87ed195_c643e50a-9cb6-4305-9305-cf24bec81b2d.1
+[2026-05-26 21:19:16Z INFO JobServerQueue] Got a job log file to send to results service.
+[2026-05-26 21:19:16Z INFO JobServerQueue] Starting upload of job log file to results service ResultsLog, C:\CDevOps-Simulation\actions-runner\_diag\blocks\1a2e398a-0517-4c10-9326-3c72b87ed195_fe8d5c90-66ed-50ee-9f32-e8e5a27982fd.1
+[2026-05-26 21:19:17Z INFO JobServerQueue] Tried to upload 3 file(s) to results, success rate: 3/3.
+[2026-05-26 21:19:17Z INFO JobServerQueue] Results upload queue drained.
+[2026-05-26 21:19:17Z INFO JobServerQueue] Timeline update queue drained.
+[2026-05-26 21:19:17Z INFO JobServerQueue] Disposing job server ...
+[2026-05-26 21:19:17Z INFO JobServerQueue] Disposing results server ...
+[2026-05-26 21:19:17Z INFO JobServerQueue] All queue process tasks have been stopped, and all queues are drained.
+[2026-05-26 21:19:17Z INFO TempDirectoryManager] Cleaning runner temp folder: C:\CDevOps-Simulation\actions-runner\_work\_temp
+[2026-05-26 21:19:17Z INFO HostContext] Well known directory 'Bin': 'C:\CDevOps-Simulation\actions-runner\bin'
+[2026-05-26 21:19:17Z INFO HostContext] Well known directory 'Root': 'C:\CDevOps-Simulation\actions-runner'
+[2026-05-26 21:19:17Z INFO HostContext] Well known directory 'Diag': 'C:\CDevOps-Simulation\actions-runner\_diag'
+[2026-05-26 21:19:17Z INFO HostContext] Well known config file 'Telemetry': 'C:\CDevOps-Simulation\actions-runner\_diag\.telemetry'
+[2026-05-26 21:19:17Z INFO JobRunner] Raising job completed against run service
+[2026-05-26 21:19:18Z INFO Worker] Job completed.

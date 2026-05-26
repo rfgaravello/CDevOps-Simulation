@@ -28,9 +28,8 @@ jobs:
 
     - name: Executar Terraform (IaC)
       run: |
-        # Chama o Terraform do Windows com o sufixo .exe
         terraform.exe init
-        terraform.exe apply -auto-approve
+        terraform.exe apply -auto-approve -lock=false
 
     - name: Executar Automacao e Auditoria com Ansible
       run: |

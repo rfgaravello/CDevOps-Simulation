@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "rfgaravello/CDevOps-Simulation",
+  "pipelineDirectory": "CDevOps-Simulation",
+  "workspaceDirectory": "CDevOps-Simulation\\CDevOps-Simulation",
+  "repositories": {
+    "rfgaravello/CDevOps-Simulation": {
+      "repositoryPath": "CDevOps-Simulation\\CDevOps-Simulation",
+      "lastRunOn": "05/26/2026 17:00:47 -03:00"
+    }
+  },
+  "lastRunOn": "05/26/2026 18:18:01 -03:00"
+}
