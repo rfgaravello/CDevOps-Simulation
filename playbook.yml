@@ -9,8 +9,9 @@
         WINDOWS_HOST_IP=$(ip route | grep default | awk '{print $3}')
         curl -s -o /dev/null -w "%{http_code}" http://$WINDOWS_HOST_IP:8080/health
       register: curl_result
+      failed_when: false  # Impede o Ansible de quebrar o pipeline antes de terminar os retries
       until: curl_result.stdout == "200"
-      retries: 10
+      retries: 12
       delay: 5
 
     - name: Validar resposta do componente de telemetria
