@@ -131,3 +131,7 @@
 [2026-05-26 12:53:51Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\CDevOps-Simulation\actions-runner\.credentials_rsaparams
 [2026-05-26 12:53:51Z INFO RSAEncryptedFileKeyManager] Loading RSA key parameters from file C:\CDevOps-Simulation\actions-runner\.credentials_rsaparams
 [2026-05-26 12:53:52Z INFO GitHubActionsService] AAD Correlation ID for this token request: Unknown
+[2026-05-26 12:53:52Z INFO BrokerMessageListener] Session created.
+[2026-05-26 12:53:52Z INFO Terminal] WRITE LINE: Current runner version: '2.334.0'
+[2026-05-26 12:53:52Z INFO Terminal] WRITE LINE: 2026-05-26 12:53:52Z: Listening for Jobs
+[2026-05-26 12:53:52Z INFO JobDispatcher] Set runner/worker IPC timeout to 30 seconds.
