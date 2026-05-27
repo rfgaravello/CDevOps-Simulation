@@ -7,20 +7,19 @@
     - name: Aguardar a API do sistema medico responder (Healthcheck)
       ansible.builtin.shell: |
         WINDOWS_HOST_IP=$(ip route | grep default | awk '{print $3}')
-        curl -s -o /dev/null -w "%{http_code}" http://$WINDOWS_HOST_IP:8080/health
+        curl -s http://$WINDOWS_HOST_IP:8080/health
       register: curl_result
-      failed_when: false  # Impede o Ansible de quebrar o pipeline antes de terminar os retries
-      until: curl_result.stdout == "200"
+      failed_when: false
+      until: "'UP' in curl_result.stdout"
       retries: 12
       delay: 5
 
     - name: Validar resposta do componente de telemetria
       ansible.builtin.assert:
         that:
-          - "'UP' in _result.json.status"
-        fail_msg: "A aplicacao falhou nos testes de validacao pos-deploy!"
-        success_msg: "Auditoria de integridade realizada com sucesso."
-
+          - "'UP' in curl_result.stdout"
+        fail_msg: "O status da telemetria nao retornou UP!"
+        success_msg: "Excelente! Componente de telemetria validado com status UP!"
     - name: Simular envio de carga/metrica de telemetria medica
       ansible.builtin.uri:
         url: "http://localhost/api/v1/telemetry"
