@@ -28,9 +28,11 @@
           -H "Content-Type: application/json" \
           -d '{"metric": "heart_rate", "value": 75, "status": "stable"}'
       register: post_result
-      # Dependendo do que o seu endpoint retorna (ex: 200 ou 201), validamos aqui. 
-      # Se quiser apenas garantir que nao de Connection Refused, deixamos passar.
 
     - name: Exibir log de deploy bem-sucedido
       ansible.builtin.debug:
-        msg: "Pipeline concluido. App rodando em ambiente: {{ _telemetry_test.json.environment }}"
+        msg: 
+          - "==========================================================="
+          - "  PIPELINE CONCLUIDO COM SUCESSO! MedEventOS ESTA ONLINE!  "
+          - "==========================================================="
+          - "Resposta do endpoint de telemetria: {{ post_result.stdout }}"
